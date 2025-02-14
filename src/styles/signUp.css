@@ -1,0 +1,39 @@
+.signupContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.signUpForm{
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items:start;
+  font-size: large;
+  box-shadow: 10px 10px 20px black;
+}
+
+.signUpForm h2{
+  align-self: center;
+  margin-bottom: 10px;
+}
+
+.signUpForm .inputs{
+  height: 30px;
+  width: 300px;
+  margin-right: 20px;
+}
+
+.signUpForm button {
+  align-self: center;
+  border-radius: 4px;
+  padding: 4px 16px;
+}
+
+.signUpForm button:hover{
+  background: rgb(255, 0, 0);
+  color: white;
+}
