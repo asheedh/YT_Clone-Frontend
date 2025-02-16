@@ -14,6 +14,7 @@ import { GiHanger } from "react-icons/gi";
 import { useContext } from "react";
 import { newContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import '../styles/sidebar.css';
 
 function Sidebar() {
     const { isCollapse } = useContext(newContext);  // Get isCollapse from Context

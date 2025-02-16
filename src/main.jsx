@@ -6,6 +6,7 @@ import App from './App.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from './pages/Login.jsx';
 import SignUp from './pages/SignUp.jsx';
+import VideoGrid from './components/VideoGrid.jsx';
 
 
 const appRouter = createBrowserRouter([
@@ -20,6 +21,10 @@ const appRouter = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+      },
+      {
+        path: '/',
+        element: <VideoGrid />
       },
     ],
   },
