@@ -7,12 +7,15 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from './pages/Login.jsx';
 import SignUp from './pages/SignUp.jsx';
 import VideoGrid from './components/VideoGrid.jsx';
+import VideoView from './components/VideoView.jsx';
+import NotFound from './components/NotFound.jsx';
 
 
 const appRouter = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <NotFound />,
     children: [
       {
         path: '/signup',
@@ -26,6 +29,10 @@ const appRouter = createBrowserRouter([
         path: '/',
         element: <VideoGrid />
       },
+      {
+        path: '/watch/:_id',
+        element: <VideoView />
+      }
     ],
   },
   
