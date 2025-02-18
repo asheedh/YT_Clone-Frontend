@@ -1,0 +1,103 @@
+.main-channel {
+  padding: 20px 10px;
+  margin-left: 40px;
+  margin-bottom: 40px;
+  width: 95%;
+  align-self: self-start;
+}
+
+.upper-container{
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+}
+ 
+.banner {
+  width: 100%;
+  height: 150px;
+  border-radius: 8px;
+}
+
+.channel-info {
+  display: flex;
+  height: 100%;
+  width: 100vh;
+  gap: 10px;
+  margin-left: 100px;
+  align-items: center;
+  
+}
+.description{
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  row-gap: 10px;
+  box-sizing: border-box;
+}
+.channel-icon{
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+.channel-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.buttons-container{
+  margin-left: 100px;
+  display: flex;
+  gap: 15px;
+}
+
+.buttons-container button, input{
+  border: none;
+  background: none;
+  padding-bottom: 12px;
+}
+
+.buttons-container button:active{
+  border-bottom: 3px solid black;
+  font-weight: bold;
+}
+
+.buttons-container input:active{
+  border-bottom: 3px solid black;
+}
+
+.actions button{
+  padding: 8px 16px;
+  border-radius: 16px;
+  border:none;
+  font-weight: bold;
+  background: gainsboro;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  color: black;
+
+}
+
+.action-btn {
+  transition: 0.3s;
+}
+
+.action-btn:hover {
+  background-color: black;
+  color: white;
+}
+
+.video-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.more-btn{
+  border: none;
+  background: none;
+  font-weight: bold;
+}

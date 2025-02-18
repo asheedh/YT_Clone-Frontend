@@ -9,6 +9,10 @@ import SignUp from './pages/SignUp.jsx';
 import VideoGrid from './components/VideoGrid.jsx';
 import VideoView from './components/VideoView.jsx';
 import NotFound from './components/NotFound.jsx';
+import SearchVideos from './components/SearchVideos.jsx';
+import CreateChannel from './pages/CreateChannel.jsx';
+import ChannelDetail from './components/ChannelDetail.jsx';
+import UplaodVideo from './pages/UploadVideo.jsx'
 
 
 const appRouter = createBrowserRouter([
@@ -18,6 +22,10 @@ const appRouter = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       {
+        path: '/',
+        element: <VideoGrid />
+      },
+      {
         path: '/signup',
         element: <SignUp />,
       },
@@ -26,13 +34,25 @@ const appRouter = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: '/',
-        element: <VideoGrid />
+        path: '/search/:searchItem',
+        element: <SearchVideos />
       },
       {
         path: '/watch/:_id',
         element: <VideoView />
-      }
+      },
+      {
+        path: '/channel/:id',
+        element: <ChannelDetail />
+      },
+      {
+        path: '/channel',
+        element: <CreateChannel />
+      },
+      {
+        path: '/uploadVideo',
+        element: <UplaodVideo />
+      },
     ],
   },
   

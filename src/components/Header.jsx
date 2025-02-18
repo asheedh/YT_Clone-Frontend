@@ -2,6 +2,7 @@ import { useContext, useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { signout } from "../redux/authSlice";
+import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import "../styles/header.css";
 import { FaMicrophone, FaYoutube, FaGoogle, FaKeyboard } from "react-icons/fa";
@@ -33,6 +34,7 @@ function Header() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [search, setSearch] = useState("");
 
     const [isProfileClicked, setIsProfileClicked] = useState(false);
     const [isCreateClicked, setIsCreateClicked] = useState(false);
@@ -79,7 +81,11 @@ function Header() {
     }, [isProfileClicked, isCreateClicked]);
 
     const handleSearchSubmit = () => {
-        console.log("searched")
+        if (search.length <= 0) {
+            return toast.error("Enter something to search");
+        }
+        navigate(`/search/${search}`);
+        setSearch("");
     };
 
     return (
