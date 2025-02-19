@@ -25,20 +25,20 @@ const SearchVideoView = ({ item }) => {
   }, [item?.channelId]);
 
   return (
-    <Link to={`/video/${item?._id}`} className="video-container">
-      <img className="thumbnail" src={item?.thumbnailUrl} alt="video thumbnail" />
+    <Link to={`/video/${item?._id}`} className="search-video-container">
+      <img className="search-view-thumbnail" src={item?.thumbnailUrl} alt="video thumbnail" />
 
-      <div className="video-data">
-        <div className="video-info">
-          <h2 className="video-title">{item?.title}</h2>
-          <p className="video-stats">
+      <div className="search-video-data">
+        <div className="search-video-info">
+          <h2 className="search-video-title">{item?.title}</h2>
+          <p className="search-video-stats">
             {formatViews(item?.views)} views • {time(item?.createdAt)}
-          </p>
+          </p> 
         </div>
 
-        <div className="channel-info">
-          <img className="channel-logo" src={channelData?.channelLogo} alt="channel logo" />
-          <h2 className="channel-name">{channelData?.channelName}</h2>
+        <div className="search-channel-info">
+          <img className="search-channel-logo" src={channelData?.channelLogo} alt="channel logo" />
+          <h2 className="search-channel-name">{channelData?.channelName}</h2>
         </div>
 
         <p className="video-description">

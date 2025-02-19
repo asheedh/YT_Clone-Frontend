@@ -1,0 +1,38 @@
+.whole {
+    width: 100%;
+}
+
+.home {
+    display: flex;
+    flex-direction: row;
+}
+
+.videos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15vw;
+    width: calc(100vw - 18vw);
+}
+
+.collapsed {
+    margin-left: 6vw;
+    width: calc(100vw - 8vw);
+}
+
+/* Responsiveness */
+@media (max-width: 600px) {
+    .videos {
+        width: 96%;
+        padding: 0px 4px;
+        margin-left: 0vw;
+        /* overflow: hidden; */
+    }
+
+    .home {
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+}

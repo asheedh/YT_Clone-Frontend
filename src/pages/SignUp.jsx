@@ -21,7 +21,7 @@ const SignUp = () => {
       navigate("/");
     }
   }, [navigate, user]);
-
+ 
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();

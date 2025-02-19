@@ -80,7 +80,7 @@ const ChannelDetail = () => {
                                     <h2 className="channel-title">{channelData?.channelName}</h2>
                                     <p>Subscribers: {channelData?.subscribers?.length}</p>
                                     <p>Channel Created on: {channelData?.createdAt?.split("T")[0]}</p>
-                                    <p>
+                                    <p id="desc">
                                         {channelData?.description?.length > 100 && !moreClick ? (
                                             <>
                                                 {channelData?.description?.slice(0, 96)}....

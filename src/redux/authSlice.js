@@ -12,15 +12,20 @@ const authSlice = createSlice({
     initialState: storedAuth,  // Load stored auth state
     reducers: {
         signin: (state, action) => {
-            console.log("Redux Payload:", action.payload); // Debugging
+            console.log("Redux Payload:", action.payload);
             state.user = action.payload.user;
             state.token = action.payload.jwtToken;
-            console.log("User id",state.user._id)
             state.isAuthenticated = true;
-
+            
+            if (action.payload.user.channel) {
+                state.user.channel = action.payload.user.channel;
+            }
+        
             // Save to localStorage
             localStorage.setItem("auth", JSON.stringify(state));
         },
+        
+        
         signout: (state) => {
             state.user = null;
             state.token = null;

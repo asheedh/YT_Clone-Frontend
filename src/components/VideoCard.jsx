@@ -26,15 +26,10 @@ function VideoCard({ videoId, title, thumbnailUrl, channelId, views, createdAt }
         };
         fetchData();
         return () => { isMounted = false; };
-    }, [channelId]);
+    }, [channelId]); 
     
     return (
-        <div className="VideoCard"
-            style={{
-                width: isCollapse ? "330px" : "400px", // Adjust width accordingly
-                height: isCollapse ? "280px" : "350px",
-            }}
-        >
+        <div className={`VideoCard ${isCollapse ? "VCcollapsed" : ""}` }>
             {/* Thumbnail */}
             <Link to={`/watch/${videoId}`}>
                 <img src={thumbnailUrl || ""} alt={title} className="thumbnailImage" />

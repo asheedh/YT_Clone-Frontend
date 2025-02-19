@@ -42,19 +42,16 @@ const ChannelVideo = ({ triggerVideoFetching, item, channelData }) => {
   };
 
   return (
-    <div className="video-card"
-        style={{
-          width: isCollapse ? "320px" : "380px", // Adjust width accordingly
-          height: isCollapse ? "270px" : "300px",
-        }}
-    >
-      <Link to={`/watch/${item._id}`}>
-        <img
+    <div className={`video-card${isCollapse ? "ChCollapse" : ""}`}>
+      <div>
+        <Link to={`/watch/${item._id}`}>
+          <img
           src={item.thumbnailUrl}
           alt={item.title.slice(0, 10) + "..."}
-          className="video-thumbnail"
-        />
-      </Link>
+          className = "video-thumbnail"
+          />
+        </Link>
+      </div>
       <div className="video-info">
         <div className="description">
           <h2 className="video-title">
@@ -77,7 +74,7 @@ const ChannelVideo = ({ triggerVideoFetching, item, channelData }) => {
                   className="option-item"
                 >
                   <CiEdit />
-                  Edit
+                  Edit 
                 </li>
                 <li onClick={() => handleDelete(item._id)} className="option-item">
                   <MdDeleteOutline />

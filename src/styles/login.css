@@ -1,4 +1,4 @@
-.login-container{
+.login-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,7 +6,7 @@
   background: white;
 }
 
-.loginForm{
+.loginForm {
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@
   box-shadow: 10px 10px 20px black;
 }
 
-.loginInput{
+.loginInput {
   height: 30px;
   width: 300px;
   padding: 4px;
@@ -30,7 +30,29 @@
   padding: 4px 16px;
 }
 
-.loginForm button:hover{
+.loginForm button:hover {
   background: red;
   border: none;
+}
+
+@media (max-width: 600px) {
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: white;
+  }
+
+  .loginForm {
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    font-size: large;
+    min-height: 50vh;
+    gap: 12px;
+    background: white;
+    box-shadow: 10px 10px 20px black;
+  }
 }

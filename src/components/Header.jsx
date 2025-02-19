@@ -2,8 +2,8 @@ import { useContext, useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { signout } from "../redux/authSlice";
-import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "../styles/header.css";
 import { FaMicrophone, FaYoutube, FaGoogle, FaKeyboard } from "react-icons/fa";
 import { GoSearch } from "react-icons/go";
@@ -19,25 +19,23 @@ import { RiLogoutBoxRLine } from "react-icons/ri";
 import { SiYoutubestudio } from "react-icons/si";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import { MdOutlineFeedback, MdSwitchAccount, MdSecurity } from "react-icons/md";
-import { IoLanguageOutline } from "react-icons/io5";
+import { IoLanguageOutline, IoArrowBack } from "react-icons/io5";
 
 function Header() {
     const { handleCollapse } = useContext(newContext);
+    const [search, setSearch] = useState("");
+    const [showSearch, setShowSearch ] = useState(false);
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [isProfileClicked, setIsProfileClicked] = useState(false);
+    const [isCreateClicked, setIsCreateClicked] = useState(false);
 
     const dispatch = useDispatch();
-
     const navigate = useNavigate();
 
     const isSigned = useSelector((state) => state.auth.isAuthenticated);
     const userId = useSelector((state) => state.auth.user?._id);
-
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [search, setSearch] = useState("");
-
-    const [isProfileClicked, setIsProfileClicked] = useState(false);
-    const [isCreateClicked, setIsCreateClicked] = useState(false);
 
     const profileRef = useRef(null);
     const createRef = useRef(null);
@@ -67,6 +65,10 @@ function Header() {
         }
     }
 
+    function handleUpload(){
+        user.channel ? navigate('/uploadVideo') : toast.error("Please Create channel to upload Video")
+    }
+
     useEffect(() => {
         function handleClickOutside(event) {
             if (isProfileClicked && profileRef.current && !profileRef.current.contains(event.target)) {
@@ -88,21 +90,63 @@ function Header() {
         setSearch("");
     };
 
+    const handleSearchClick = () => setShowSearch(true);
+    const handleBackClick = () => setShowSearch(false);
+
     return (
-        <div className="Header">
-            <div className="Header-Container1">
+        <div className="header">
+            <div className="logo-Container">
                 <button className="menu" onClick={handleCollapse}><BsList /></button>
-                <div className="logo"><FaYoutube /> <p>YouTube</p></div>
+                <Link to={'/'}><div className="logo">  <FaYoutube /> <p>YouTube</p> </div></Link>
             </div>
             <div className="searchContainer">
                 <div className="search-field">
-                    <input type="text" placeholder="Search" id="search-bar" />
+                    <input value={search} onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Search" id="search-bar" />
                     <button type="submit" onClick={handleSearchSubmit} className="search-button">
                         <GoSearch size={20} />
                     </button>
                 </div>
                 <button className="microphone"><FaMicrophone /></button>
             </div>
+            <div className="mbl-header">
+                {!showSearch && (
+                    <div className="mbl-header-content">
+                        <div className="mbl-logo-Container">
+                            <button className="menu" onClick={handleCollapse}><BsList /></button>
+                            <Link to={'/'}><div className="logo">  <FaYoutube /> <p>YouTube</p> </div></Link>
+                        </div>
+                    </div>
+                )}
+                <div className={`mbl-search-container ${showSearch ? "active" : ""}`}>
+                    {showSearch && (
+                    <button className="mbl-back-btn" onClick={handleBackClick}>
+                        <IoArrowBack size={24} />
+                    </button>
+                    )}
+                    <input
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    type="text"
+                    placeholder="Search"
+                    className="mbl-search-bar"
+                    autoFocus={showSearch}
+                    />
+                    {showSearch && (
+                    <button type="submit" onClick={handleSearchSubmit} className="mbl-search-btn">
+                        <GoSearch size={20} />
+                    </button>
+                    )}
+                    
+                    {!showSearch && (
+                    <button id="mbl-search-btn" onClick={handleSearchClick}>
+                        <GoSearch size={20} />
+                    </button>
+                    )}
+                </div>
+            </div>
+
+
+            <div className="action-container">
             {isSigned ? (
                 <div className="user-actions">
                     <div ref={createRef}>
@@ -111,9 +155,9 @@ function Header() {
                         </button>
                         {isCreateClicked && (
                             <div className="dropdown-menu2">
-                                <button className="dropdown-item" onClick={() => navigate('#')}>
-                                    <AiOutlinePlaySquare /> <span>Upload video</span>
-                                </button>
+                                    <button className="dropdown-item" onClick={() => handleUpload()}>
+                                        <AiOutlinePlaySquare /> <span>Upload video</span>
+                                    </button>
                                 <button className="dropdown-item">
                                     <CiStreamOn /><span>Go live</span>
                                 </button>
@@ -146,16 +190,11 @@ function Header() {
                                         </div>
                                     )}
                                     <div className="dropdown-div">
-                                        <p id="userName">{user?.userName}</p>
+                                        <p id="userName"> <Link to={`/profile/${user?._id}`}> {user?.userName} </Link></p>
                                         {user && user.channel?.length > 0 ? (
-                                            <>
-                                                <Link>View your Profile</Link>
-                                                <br />
-                                                <Link>View your channel</Link>
-                                            </>
-
+                                                <Link to={`/channel/${user?.channel}`}>View your channel</Link>
                                         ) : (
-                                            <Link>Create your channel</Link>
+                                            <Link to={`/channel`}>Create your channel</Link>
                                         )}
                                     </div>
                                 </div>
@@ -199,6 +238,7 @@ function Header() {
                     <button id="create"><PiUserCircleThin /> <span> Sign in </span> </button>
                 </Link>
             )}
+            </div>
         </div>
     );
 }

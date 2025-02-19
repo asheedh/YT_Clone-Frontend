@@ -21,11 +21,14 @@ const VideoView = () => {
   const [commentTrigger, setCommentTrigger] = useState(false);
   const [moreClick, setMoreClick] = useState(false);
   const [isSubscribe, setIsSubscribed] = useState(false);
+  const [moreComments, setMoreComments] = useState(false);
+  const [visibleComments, setVisibleComments] = useState(2);
 
   const { isCollapse, setIsCollapse } = useContext(newContext); // Get sidebar state
   const isSigned = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
+
 
   // Like video
   const handleLike = async () => {
@@ -102,7 +105,7 @@ const VideoView = () => {
         }
       }
     };
-    
+
     fetchData();
   }, [video]);
 
@@ -141,6 +144,12 @@ const VideoView = () => {
     setMoreClick((prev) => !prev);
   };
 
+  //handle moreComments 
+  const handleMoreComments = () => {
+    setMoreComments((prev) => !prev);
+    setVisibleComments((prev) => (prev === 2 ? comments.length : 2));
+  };
+
   // Fetch video comments
   const fetchVideoComments = async () => {
     const { data } = await axios.get(
@@ -152,7 +161,7 @@ const VideoView = () => {
   };
 
   // Toggle comment re-fetch
-  const triggerCommentFetch = async() => {
+  const triggerCommentFetch = async () => {
     setCommentTrigger((prev) => !prev);
   };
 
@@ -190,14 +199,14 @@ const VideoView = () => {
     if (!isSigned) {
       return toast.error("Login first");
     }
-  
+
     try {
       const { data } = await axios.put(
         `http://localhost:5200/api/channel/subscribeChannel/${channelData._id}/${user._id}`,
         {},
         { headers: { Authorization: `JWT ${token}` } }
       );
-  
+
       if (data.success) {
         setIsSubscribed((prev) => !prev); // Toggle subscription status immediately
         toast.success(data.message || (isSubscribe ? "Unsubscribed" : "Subscribed"));
@@ -205,23 +214,23 @@ const VideoView = () => {
     } catch (error) {
       toast.error(error.response?.data?.message || "Error occurred");
     }
-  };    
+  };
   return (
     <div className="video_View_Container">
       {/* Left Section: Video, Details, and Comments */}
       <div className="video-left">
         <iframe className="video-iframe" src={`https://www.youtube.com/embed/${videoUrl}`}
-          title={`${videoData.title}`} frameBorder="0" 
+          title={`${videoData.title}`} frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
         ></iframe>
 
         <div className="operations">
-          <h2>{`${videoData?.title}`} </h2>
+          <h2 id="video-title">{`${videoData?.title}`} </h2>
           <div className="video-operations">
             <div className="left-group">
               {console.log(channelData)}
-              <Link to={`#`} className="channel-link">
+              <Link to={`/channel/${channelData._id}`} className="channel-link">
                 <img
                   id="logo"
                   src={channelData.channelLogo}
@@ -229,9 +238,9 @@ const VideoView = () => {
                 />
                 <h2 className="channel-name">{channelData.channelName}</h2>
               </Link>
-              
-              <button onClick={handleSubscribe} className= { `subscribe-btn ${isSubscribe ? "subscribed" : ""}` } >
-              {isSubscribe ? "Subscribed" : "Subscribe" } 
+
+              <button onClick={handleSubscribe} className={`subscribe-btn ${isSubscribe ? "subscribed" : ""}`} >
+                {isSubscribe ? "Subscribed" : "Subscribe"}
               </button>
             </div>
             <div className="extra-information">
@@ -267,7 +276,7 @@ const VideoView = () => {
                 {videoData?.description}...
                 <button className="more-btn" onClick={() => handleMoreClick()}> less </button>
               </>
-              
+
             )}
           </p>
         </div>
@@ -277,47 +286,51 @@ const VideoView = () => {
           <button onClick={handleComment}>Comment</button>
         </div>
 
+        {comments.length > 2 && (
+          <button className="more-btn" onClick={handleMoreComments}>
+            {moreComments ? "Less Comments" : "More Comments"}
+          </button>
+        )}
+
         <div className="comments-list">
-        
-          {comments && comments.length > 0
-            ? 
-            comments.map((item) => (
-                <Comment
-                  triggerCommentFetch={triggerCommentFetch}
-                  
-                  video={video}
-                  key={item._id}
-                  id={item._id}
-                  createdAt={item.createdAt}
-                  owner={item.owner}
-                  description={item.description}
-                />
-              ))
-            : "No comments to display"}
+          {comments && comments.length > 0 ? (
+            comments.slice(0, visibleComments).map((item) => (
+              <Comment
+                triggerCommentFetch={triggerCommentFetch}
+                video={video}
+                key={item._id}
+                id={item._id}
+                createdAt={item.createdAt}
+                owner={item.owner}
+                description={item.description}
+              />
+            ))
+          ) : (
+            "No comments to display"
+          )}
         </div>
       </div>
-
       {/* Right Section: Related Videos */}
       <div className="sideView">
         <h2 className="sideView-title">Channel related videos</h2>
-        <div className="sideVideosList"> 
+        <div className="sideVideosList">
           {channelVideos && channelVideos.length > 0
             ? channelVideos.map((item) => (
-                <Link to={`/watch/${item._id}`} key={item._id} className="boxVideo">
-                  <img className="box-video-img" src={item.thumbnailUrl} alt="video thumbnail" loading="lazy" />
-                  <div className="details">
-                    <h2>
-                      {item.title.length > 55
-                        ? item.title.slice(0, 55) + "..."
-                        : item.title}
-                    </h2>
-                    <h2>{channelData.channelName}</h2>
-                    <h2>
-                      {formatViews(item.views)} • {time(item.createdAt)}
-                    </h2>
-                  </div>
-                </Link>
-              ))
+              <Link to={`/watch/${item._id}`} key={item._id} className="boxVideo">
+                <img className="box-video-img" src={item.thumbnailUrl} alt="video thumbnail" loading="lazy" />
+                <div className="details">
+                  <h2>
+                    {item.title.length > 55
+                      ? item.title.slice(0, 55) + "..."
+                      : item.title}
+                  </h2>
+                  <h2>{channelData.channelName}</h2>
+                  <h2>
+                    {formatViews(item.views)} • {time(item.createdAt)}
+                  </h2>
+                </div>
+              </Link>
+            ))
             : "No videos related to channel"}
         </div>
       </div>

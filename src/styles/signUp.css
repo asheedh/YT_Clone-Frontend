@@ -8,6 +8,7 @@
 .signUpForm{
   border: 2px solid black;
   border-radius: 8px;
+  gap: 10px;
   padding: 36px;
   display: flex;
   flex-direction: column;
@@ -24,6 +25,7 @@
 .signUpForm .inputs{
   height: 30px;
   width: 300px;
+  font-size: medium;
   margin-right: 20px;
 }
 
@@ -36,4 +38,27 @@
 .signUpForm button:hover{
   background: rgb(255, 0, 0);
   color: white;
+}
+
+@media (max-width: 600px) {
+  .login-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: white;
+  }
+
+  .signUpForm{
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    font-size: large;
+    min-height: 60vh;
+    gap: 8px;
+    background: white;
+    box-shadow: 4px 2px 8px 2px black;
+    border: none;
+  }
 }

@@ -4,6 +4,13 @@
 .VideoCard {
     overflow: hidden;
     border-radius: 8px;
+    width: 400px;
+    height: 350px
+}
+
+.VCcollapsed {
+    width: 330px;
+    height: 280px;
 }
 
 .thumbnailImage {
@@ -43,3 +50,17 @@
     font-size: small;
     font-weight: lighter;
 }
+
+
+/* Responsiveness  */
+
+@media (max-width: 600px) {
+    .VideoCard{
+        width: 100%;
+        border-radius: 0px;
+    }
+    .thumbnailImage {
+        border-radius: 0px;
+    }
+  
+  }
