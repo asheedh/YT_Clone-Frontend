@@ -21,17 +21,20 @@ const EditVideo = () => {
     });
 
     useEffect(() => {
+        // Function to fetch video data by ID
         const fetchData = async () => {
             try {
                 const { data } = await axios.get(
                     `http://localhost:5200/api/video/${params.id}`
                 );
 
+                // Check if the user is authorized to edit the video
                 if (data.video.uploader !== user._id) {
                     navigate("/");
                     toast.error("Unauthorized access!");
                 }
 
+                // Set form data with fetched video details
                 if (data) {
                     setFormData({
                         title: data.video.title || "",
@@ -50,11 +53,13 @@ const EditVideo = () => {
         fetchData();
     }, [params, user._id, navigate]);
 
+    // Handle form input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
+    // Handle form submission to update video details
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
@@ -93,7 +98,7 @@ const EditVideo = () => {
 
                 <img
                     className="edit-video-thumbnail"
-                    src={formData.thumbnailUrl ||"https://png.pngtree.com/png-vector/20190215/ourmid/pngtree-play-video-icon-graphic-design-template-vector-png-image_530837.jpg"}
+                    src={formData.thumbnailUrl || "https://png.pngtree.com/png-vector/20190215/ourmid/pngtree-play-video-icon-graphic-design-template-vector-png-image_530837.jpg"}
                     alt="video"
                 />
 
@@ -119,7 +124,7 @@ const EditVideo = () => {
                     <option value="Finance">Finance</option>
                     <option value="Gaming">Gaming</option>
                     <option value="Technology">Technology</option>
-                    <option value="Entertainment"> Entertainment </option>
+                    <option value="Entertainment">Entertainment</option>
                     <option value="Anime">Anime</option>
                 </select>
 

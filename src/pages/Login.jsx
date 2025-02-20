@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { signin } from "../redux/authSlice"; 
+import { signin } from "../redux/authSlice";
 import "../styles/login.css";
 
 function Login() {
@@ -11,11 +11,13 @@ function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    // Handle input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
+    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
@@ -39,11 +41,11 @@ function Login() {
             if (!response.ok) {
                 throw new Error(result.message || "Login failed");
             }
-            
+
             localStorage.setItem("results", result);
 
             dispatch(signin(result));
-            navigate("/"); 
+            navigate("/");
         } catch (err) {
             setError(err.message);
         } finally {

@@ -11,28 +11,22 @@ const UploadVideo = () => {
   const jwtToken = useSelector((state) => state.auth.token);
   const Channel = useSelector((state) => state.userChannel.userChannelDetails);
 
-  console.log("channel",Channel)
-
-  console.log(user)
-
   const [userChannel, setUserChannel] = useState(Channel);
   const [loading, setLoading] = useState(true);
-  console.log(userChannel)
-  console.log(user?.channel)
 
   useEffect(() => {
+    // Fetch the user's channel details
     const fetchChannel = async () => {
       if (user?.channel) {
         try {
           const { data } = await axios.get(
-           ` http://localhost:5200/api/channel/${user?.channel}`,
+            ` http://localhost:5200/api/channel/${user?.channel}`,
             {
               headers: {
                 Authorization: `JWT ${jwtToken}`,
               },
             }
           );
-          console.log("Fetched userChannel", data);
           setUserChannel(data.channel);
         } catch (error) {
           console.error("Error fetching channel:", error);
@@ -47,6 +41,7 @@ const UploadVideo = () => {
   }, [user, jwtToken]);
 
   useEffect(() => {
+    // Redirect to home if the user doesn't have a channel
     if (!loading && (!userChannel || Object.keys(userChannel).length === 0)) {
       toast.error("You need a channel to upload videos!");
       navigate("/");
@@ -61,11 +56,13 @@ const UploadVideo = () => {
     category: "",
   });
 
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Handle form submission
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -114,19 +111,19 @@ const UploadVideo = () => {
 
         <img
           className="edit-video-thumbnail"
-          src= {formData?.thumbnailUrl || 
-          "https://png.pngtree.com/png-vector/20190215/ourmid/pngtree-play-video-icon-graphic-design-template-vector-png-image_530837.jpg"}
+          src={formData?.thumbnailUrl ||
+            "https://png.pngtree.com/png-vector/20190215/ourmid/pngtree-play-video-icon-graphic-design-template-vector-png-image_530837.jpg"}
           alt="video"
         />
 
         <label htmlFor="title">Video Title</label>
-        <input id="title" type="text" required value={formData.title} name="title" onChange={handleChange}/>
+        <input id="title" type="text" required value={formData.title} name="title" onChange={handleChange} />
 
         <label htmlFor="thumbnailUrl">Thumbnail URL</label>
-        <input id="thumbnailUrl" type="url" required value={formData.thumbnailUrl} name="thumbnailUrl" onChange={handleChange}/>
+        <input id="thumbnailUrl" type="url" required value={formData.thumbnailUrl} name="thumbnailUrl" onChange={handleChange} />
 
         <label htmlFor="videoUrl">Video URL</label>
-        <input id="videoUrl" type="url" required value={formData.videoUrl} name="videoUrl" onChange={handleChange}/>
+        <input id="videoUrl" type="url" required value={formData.videoUrl} name="videoUrl" onChange={handleChange} />
 
         <label htmlFor="category">Category</label>
         <select id="category" name="category" required value={formData.category} onChange={handleChange}>
@@ -146,8 +143,7 @@ const UploadVideo = () => {
         </select>
 
         <label htmlFor="description">Video Description</label>
-        <textarea id="description" rows={5} required value={formData.description} name="description" onChange={handleChange}
-        />
+        <textarea id="description" rows={5} required value={formData.description} name="description" onChange={handleChange} />
 
         <button type="submit" className="upload-button">Upload</button>
       </form>

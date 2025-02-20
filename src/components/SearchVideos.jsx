@@ -10,6 +10,7 @@ const SearchVideos = () => {
   const params = useParams();
 
   useEffect(() => {
+    // Function to fetch videos based on search item
     const fetchVideos = async () => {
       try {
         const { data } = await axios.get(
@@ -31,15 +32,15 @@ const SearchVideos = () => {
       <h2 className="results-heading">Search Results for: "{params.searchItem}"</h2>
       <div className="results-list">
         {videoResults && videoResults.length >= 1 ? (
-          videoResults.map((item) => 
-          <SearchVideoView key={item._id} 
-            item={item}
-            videoId={item._id}
-            title={item.title}
-            channelId={item.channelId}
-            thumbnailUrl={item.thumbnailUrl}
-            views={item.views}
-            createdAt={item.createdAt} 
+          videoResults.map((item) =>
+            <SearchVideoView key={item._id}
+              item={item}
+              videoId={item._id}
+              title={item.title}
+              channelId={item.channelId}
+              thumbnailUrl={item.thumbnailUrl}
+              views={item.views}
+              createdAt={item.createdAt}
             />)
         ) : (
           <h2 className="no-results">No videos matched your search</h2>

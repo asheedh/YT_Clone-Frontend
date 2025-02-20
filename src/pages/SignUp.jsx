@@ -21,8 +21,8 @@ const SignUp = () => {
       navigate("/");
     }
   }, [navigate, user]);
- 
 
+  // Handle form submission
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -47,7 +47,7 @@ const SignUp = () => {
     }
   };
 
-
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });

@@ -4,7 +4,8 @@
   width: 380px;
   height: 300px;
 }
-.video-cardChCollapse{
+
+.video-cardChCollapse {
   width: 320px;
   height: 270px;
 }
@@ -15,31 +16,37 @@
   object-fit: cover;
   border-radius: 8px;
 }
+
 .video-info {
-  display: flex; 
+  display: flex;
   gap: 10px;
 }
+
 .description {
   flex: 1;
 }
+
 .video-title {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 5px;
 }
+
 .video-meta {
   font-size: 14px;
   color: gray;
 }
+
 .video-options {
   position: relative;
   padding: 10px;
 }
+
 .options-icon {
   cursor: pointer;
   font-size: 20px;
 }
-  
+
 .options-menu {
   position: absolute;
   top: 25px;
@@ -52,15 +59,15 @@
   min-width: 100px;
   z-index: 10;
 }
-  
+
 .options-menu.hide {
   display: none;
 }
-  
+
 .options-menu.show {
   display: block;
 }
-  
+
 .option-item {
   display: flex;
   align-items: center;
@@ -69,18 +76,19 @@
   cursor: pointer;
   font-size: 14px;
 }
-  
+
 .option-item:hover {
-  background-color: #f1f1f1;
+  background-color: #f1f1f1; /* Light gray background color on hover */
 }
 
 @media (max-width: 600px) {
-  .video-cardChCollapse{
-    height: 100%;
-    width: 100%;
+  .video-cardChCollapse {
+    height: 100%; /* Full height for video card in small screens */
+    width: 100%; /* Full width for video card in small screens */
   }
-  .video-thumbnail{
-    border-radius: 0px;
-    width: 100%;
+
+  .video-thumbnail {
+    border-radius: 0px; /* Remove border radius for video thumbnail in small screens */
+    width: 100%; /* Full width for video thumbnail in small screens */
   }
 }

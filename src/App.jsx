@@ -4,58 +4,53 @@ import { signin, signout } from "./redux/authSlice"; // Import Redux actions
 import Header from "./components/Header.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import { Outlet } from "react-router-dom";
+import Loader from "./components/Loader.jsx";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 
-
-export const newContext = createContext();
+export const newContext = createContext(); // Create a new context
 
 function App() {
-    const [isCollapse, setIsCollapse] = useState(false);
+    const [isCollapse, setIsCollapse] = useState(true); // State for sidebar collapse
     const dispatch = useDispatch();
-    const isSigned = useSelector((state) => state.auth.isAuthenticated);
-    const token = useSelector((state) => state.auth.user?.token); 
-    const [loading, setLoading] = useState(true);
+    const isSigned = useSelector((state) => state.auth.isAuthenticated); // Get authentication state
+    const token = useSelector((state) => state.auth.user?.token); // Get user token
+    const [loading, setLoading] = useState(true); // State for loading
 
     useEffect(() => {
         if (token) {
-            dispatch(signin({ token })); 
+            dispatch(signin({ token })); // Sign in if token exists
         }
-        setLoading(false);
-    }, [token, dispatch]); 
+        setLoading(false); // Set loading to false
+    }, [token, dispatch]);
 
     function handleCollapse() {
-        setIsCollapse((prevState) => !prevState);
+        setIsCollapse((prevState) => !prevState); // Toggle sidebar collapse state
     }
 
     function handleSignIn(token) {
-        dispatch(signin({ token }));
+        dispatch(signin({ token })); // Dispatch sign in action
     }
 
     function handleSignOut() {
-        dispatch(signout());
+        dispatch(signout()); // Dispatch sign out action
     }
 
     if (loading) {
-        return <p>Loading...</p>;
+        return <Loader/>; // Show loader while loading
     }
 
     return (
-        <newContext.Provider value={{ isCollapse, handleCollapse, isSigned, handleSignIn, handleSignOut }}>
-                <Header />
-                <div className="home">
-                    <Sidebar />
-                    <div className="videos" 
-                        style={{
-                            marginLeft: isCollapse ? "6vw" : "15vw", // Adjust margin dynamically
-                            width: isCollapse ? "calc(100vw - 8vw)" : "calc(100vw - 10vw)", // Adjust width accordingly
-                        }}
-                        >
-                        <Outlet />
-                    </div>
+        <newContext.Provider className="whole" value={{ isCollapse, setIsCollapse, handleCollapse, isSigned, handleSignIn, handleSignOut }}>
+            <Header />
+            <div className="home">
+                <Sidebar />
+                <div className={`videos ${isCollapse ? "collapsed" : ""}`}>
+                    <Outlet />
                 </div>
-                <ToastContainer position="top-right" autoClose={3000} />
+            </div>
+            <ToastContainer position="top-right" autoClose={3000} />
         </newContext.Provider>
     );
 }

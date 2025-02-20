@@ -50,9 +50,9 @@
     flex-direction: column;
     padding: 16px;
     font-size: large;
-    min-height: 50vh;
+    min-height: 50vh; /* Minimum height for login form on small screens */
     gap: 12px;
     background: white;
-    box-shadow: 10px 10px 20px black;
+    box-shadow: 10px 10px 20px black; /* Shadow for login form */
   }
 }

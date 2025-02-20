@@ -13,8 +13,13 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!user?.channel) return; // Prevents the request if user.channel is undefined
+    // If the user doesn't have a channel, we finish loading without fetching data.
+    if (!user?.channel) {
+      setLoading(false);
+      return;
+    }
 
+    // Fetch channel details if a channel exists
     const fetchChannelData = async () => {
       try {
         const response = await axios.get(`http://localhost:5200/api/channel/${user.channel}`);
@@ -27,42 +32,44 @@ const Profile = () => {
     };
 
     fetchChannelData();
-  }, [user?.channel]); // Dependency array ensures the effect runs only when user.channel changes
-  console.log("channel data",channelData)
+  }, [user?.channel]);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (!user) {
+    return <div>No user logged in</div>;
+  }
 
   return (
-    <>
-      {loading ? (
-        <Loader />
-      ) : (
-        <div className="profile-container"> 
-                {user?.avatar ? (
-                <div className="image-container">
-                    <img src={user?.avatar} alt="Profile" className="profile-pic" />   
-                </div>
-                ) :(
-                    <div className="profile-placeholder">
-                        {`${user?.userName?.charAt(0).toUpperCase()}`}
-                    </div>
-                )}
-                <div className="profile-details">
-                    <h1>{user?.userName || "channel"}</h1>
-                    <p>Channel : {channelData.channelName}</p>
-                    <br /> 
-                    <div className="custButtons" >
-                      <Link to={`/channel/${user?.channel}`}>
-                        <button>View Channel</button>
-                      </Link>
-                      <Link to={'/'}>
-                        <button onClick={() => dispatch(signout())}> Logout </button>
-                      </Link>
-                    </div>
-                </div>    
+    <div className="profile-container">
+      {user?.avatar ? (
+        <div className="image-container">
+          <img src={user?.avatar} alt="Profile" className="profile-pic" />
         </div>
-      )
-    } 
-  </>
-  )
+      ) : (
+        <div className="profile-placeholder">
+          {user?.userName?.charAt(0).toUpperCase()}
+        </div>
+      )}
+      <div className="profile-details">
+        <h1>{user?.userName || "Channel"}</h1>
+        <p>Channel: {channelData?.channelName || "No Channel"}</p>
+        <br />
+        <div className="custButtons">
+          {user?.channel && (
+            <Link to={`/channel/${user.channel}`}>
+              <button>View Channel</button>
+            </Link>
+          )}
+          <Link to={'/'}>
+            <button onClick={() => dispatch(signout())}>Logout</button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Profile;

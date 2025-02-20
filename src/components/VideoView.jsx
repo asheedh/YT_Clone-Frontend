@@ -29,7 +29,6 @@ const VideoView = () => {
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
 
-
   // Like video
   const handleLike = async () => {
     if (!isSigned) {

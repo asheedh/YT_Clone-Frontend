@@ -9,6 +9,7 @@ const SearchVideoView = ({ item }) => {
   const [channelData, setChannelData] = useState({});
 
   useEffect(() => {
+    // Function to fetch channel data based on channel ID
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
@@ -33,7 +34,7 @@ const SearchVideoView = ({ item }) => {
           <h2 className="search-video-title">{item?.title}</h2>
           <p className="search-video-stats">
             {formatViews(item?.views)} views • {time(item?.createdAt)}
-          </p> 
+          </p>
         </div>
 
         <div className="search-channel-info">
@@ -46,7 +47,6 @@ const SearchVideoView = ({ item }) => {
         </p>
       </div>
     </Link>
-
   );
 };
 

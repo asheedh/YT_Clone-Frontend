@@ -6,12 +6,12 @@
   align-self: self-start;
 }
 
-.upper-container{
+.upper-container {
   display: flex;
   flex-direction: column;
   row-gap: 40px;
 }
- 
+
 .banner {
   width: 100%;
   height: 20vh;
@@ -25,16 +25,18 @@
   width: 100vh;
   gap: 10px;
   margin-left: 100px;
-  align-items: center;  
+  align-items: center;
 }
-.description{
+
+.description {
   display: flex;
   flex-direction: column;
   padding: 4px;
   row-gap: 10px;
   box-sizing: border-box;
 }
-.channel-icon{
+
+.channel-icon {
   border-radius: 50%;
   width: 150px;
   height: 150px;
@@ -45,33 +47,36 @@
   font-weight: bold;
 }
 
-.buttons-container{
+.buttons-container {
   margin-left: 100px;
   display: flex;
   gap: 15px;
 }
 
-.buttons-container button, input{
+.buttons-container button,
+input {
   border: none;
   background: none;
   padding-bottom: 12px;
 }
 
-.buttons-container button:active{
+.buttons-container button:active {
   border-bottom: 3px solid black;
   font-weight: bold;
 }
 
-.buttons-container input:active{
+.buttons-container input:active {
   border-bottom: 3px solid black;
 }
 
-.actions button{
+.actions button {
   padding: 8px 16px;
   border-radius: 16px;
-  border:none;
+  border: none;
   font-weight: bold;
   background: gainsboro;
+  font-size: x-small; /* Small font size for action buttons */
+  padding: 4px 8px; /* Padding for action buttons */
 }
 
 .actions {
@@ -96,45 +101,73 @@
   gap: 10px;
 }
 
-.more-btn{
+.more-btn {
   border: none;
   background: none;
   font-weight: bold;
+}
+
+#desc {
+  display: none; /* Hide description by default */
+}
+
+.buttons-container {
+  margin: 0px; /* Remove margin for buttons container */
 }
 
 @media (max-width: 600px) {
   .main-channel {
     margin-left: 0px;
   }
+
   .banner {
     width: 90vw;
   }
-  .channel-info{
+
+  .channel-info {
     margin-left: 0px;
   }
-  .description{
+
+  .description {
     font-size: small;
     gap: 0px;
   }
+
   .channel-title {
     font-size: large;
   }
-  .channel-icon{
+
+  .channel-icon {
     height: 75px;
     width: 75px;
   }
-  .actions{
+
+  .actions {
     width: 250px;
   }
+
   .actions button {
     font-size: x-small;
     padding: 4px 8px;
   }
+
   #desc {
     display: none;
   }
+
   .buttons-container {
     margin: 0px;
   }
-  
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .main-channel {
+    margin-left: 0px; /* Remove left margin for main channel */
+  }
+
+  .channel-info,
+  .buttons-container {
+    margin-left: 0px; /* Remove left margin for channel info and buttons container */
+  }
 }

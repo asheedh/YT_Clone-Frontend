@@ -4,7 +4,7 @@ import { PiFilmSlate } from "react-icons/pi";
 import { CiSettings, CiStreamOn } from "react-icons/ci";
 import { IoFlagOutline, IoBagHandleOutline, IoMusicalNotesOutline, IoTrophyOutline } from "react-icons/io5";
 import { IoIosHelpCircleOutline } from "react-icons/io";
-import { FaHistory, FaYoutube, FaUser, FaUserCircle } from "react-icons/fa";
+import { FaHistory, FaYoutube, FaUserCircle } from "react-icons/fa";
 import { FiPlusCircle } from 'react-icons/fi';
 import { MdHome, MdOutlineWatchLater, MdOutlineSubscriptions, MdOutlineFeedback, MdPodcasts, MdNewspaper } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
@@ -37,7 +37,7 @@ function Sidebar() {
                     <button><MdOutlineSubscriptions /> {!isCollapse} <span id="subs">Subscriptions</span></button>
                     {isCollapse && (
                         <button className="usericon">
-                            <FaUser id="icon" />
+                            <FaUserCircle id="icon" />
                             <span>you</span>
                         </button>
                     )}
@@ -126,7 +126,6 @@ function Sidebar() {
                         )}
                     </button>
                 ) : (
-                    
                     <button className="mbl-view-ele"> <Link to={'/login'}> <FaUserCircle /> </Link></button>
                 )}
             </div>

@@ -1,12 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "./authSlice";
-import userChannelReducer from "./userChannelSlice";  // Corrected import name
+import { configureStore } from "@reduxjs/toolkit"; // Importing configureStore from Redux Toolkit
+import authReducer from "./authSlice"; // Importing authReducer from authSlice
+import userChannelReducer from "./userChannelSlice"; // Importing userChannelReducer from userChannelSlice
 
 const store = configureStore({
     reducer: {
-        auth: authReducer,
-        userChannel: userChannelReducer,  // Updated key name
+        auth: authReducer, // Adding authReducer to the store
+        userChannel: userChannelReducer, // Adding userChannelReducer to the store
     },
 });
 
-export default store;
+export default store; // Exporting the configured store

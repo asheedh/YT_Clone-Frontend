@@ -61,9 +61,21 @@
 /* Responsiveness */
 @media (max-width: 600px) {
   .category {
-    scrollbar-width: none;
-    justify-content: left;
-    margin-left: 14px;
+    scrollbar-width: none; /* Hide scrollbar */
+    justify-content: left; /* Align items to the left */
+    margin-left: 14px; /* Margin for category section */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .category {
+    margin-left: 12px; /* Margin for category section */
+    justify-content: left; /* Align items to the left */
+    padding: 16px; /* Padding for category section */
+    scrollbar-width: none; /* Hide scrollbar */
   }
 
+  .category-item {
+    padding: 4px 16px; /* Padding for category items */
+  }
 }

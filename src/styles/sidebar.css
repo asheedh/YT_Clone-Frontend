@@ -41,13 +41,12 @@ aside span {
 #icon {
     border: 2px solid rgb(196, 196, 196);
     background: rgb(236, 236, 236);
-    border-radius: 50%;
-    font-size: x-large;
+    border-radius: 9999px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     padding: 0px;
 }
 
@@ -256,8 +255,28 @@ aside.collapsed .container1 :nth-child(3) {
 
 }
 
-/* @media (min-width: 768px) and (max-width: 1024px) {
-    aside.collapsed .container1{
-
+@media (min-width: 768px) and (max-width: 1024px) {
+    aside.collapsed .container1 button {
+        padding: 4px; /* Adjust padding for buttons in collapsed sidebar */
     }
-} */
+
+    .container1,
+    .container2,
+    .container4,
+    .container5,
+    .container6 {
+        padding: 0px; /* Remove padding for containers */
+    }
+
+    aside {
+        width: 180px; /* Set width for sidebar */
+    }
+
+    .container4 p {
+        display: none; /* Hide paragraphs in container4 */
+    }
+
+    .container5 p {
+        display: none; /* Hide paragraphs in container5 */
+    }
+}

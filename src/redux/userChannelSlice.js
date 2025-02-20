@@ -1,18 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// userchannelslice for tracking user channel
+// userChannelSlice for tracking user channel
 const userChannelSlice = createSlice({
-    name: "userChannel",
+    name: "userChannel", // Name of the slice
     initialState: {
-        userChannelDetails: {},
+        userChannelDetails: {}, // Initial state with empty userChannelDetails
     },
     reducers: {
         setUserChannelDetails: (state, action) => {
-            console.log("User channel details:", action.payload);
-            state.userChannelDetails = action.payload; // Directly assign payload
+            console.log("User channel details:", action.payload); // Logging the payload
+            state.userChannelDetails = action.payload; // Directly assign payload to userChannelDetails
         },
         clearUserChannelDetails: (state) => {
-            state.userChannelDetails = {};
+            state.userChannelDetails = {}; // Clear userChannelDetails
         },
     }
 });

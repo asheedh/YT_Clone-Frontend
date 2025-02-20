@@ -17,6 +17,7 @@ const Comment = ({ triggerCommentFetch, createdAt, owner, description, id, video
   const [op, setOp] = useState(false);
 
   useEffect(() => {
+    // Fetch the owner of the comment
     const fetchOwner = async () => {
       try {
         const { data } = await axios.get(
@@ -30,8 +31,9 @@ const Comment = ({ triggerCommentFetch, createdAt, owner, description, id, video
       }
     };
     fetchOwner();
-  }, []);
+  }, [owner]);
 
+  // Handle comment deletion
   const handleDelete = async () => {
     try {
       const result = await axios.delete(
@@ -48,6 +50,7 @@ const Comment = ({ triggerCommentFetch, createdAt, owner, description, id, video
     }
   };
 
+  // Handle comment update
   const handleUpdate = async () => {
     try {
       const result = await axios.put(
@@ -72,7 +75,7 @@ const Comment = ({ triggerCommentFetch, createdAt, owner, description, id, video
         <img className="comment-avatar" src={commentOwner?.avatar} alt="avatar" />
         <div className="comment-data">
           <h3>
-          {commentOwner?.userName} • <span className="comment-time">{time(createdAt)}</span>
+            {commentOwner?.userName} • <span className="comment-time">{time(createdAt)}</span>
           </h3>
 
           {isEditing ? (

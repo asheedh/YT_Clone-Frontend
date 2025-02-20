@@ -18,7 +18,6 @@ const ChannelDetail = () => {
     useEffect(() => {
         // Function to fetch channel data by ID
         const fetchChannelData = async () => {
-            console.log(id)
             if (!id) return; // Prevents invalid API calls
             try {
                 const { data } = await axios.get(`http://localhost:5200/api/channel/${id}`);
@@ -86,7 +85,7 @@ const ChannelDetail = () => {
                                                 {channelData?.description?.slice(0, 96)}....
                                                 <button className="more-btn" onClick={() => handleMoreClick()}> more </button>
                                             </>
-                                            ) : (
+                                        ) : (
                                             <>
                                                 {channelData?.description}...
                                                 <button className="more-btn" onClick={() => handleMoreClick()}> less </button>
@@ -118,7 +117,6 @@ const ChannelDetail = () => {
                     )}
                     <hr />
                     <br />
-                    {/* Display video grid below */}
                     <div className="video-box">
                         {channelVideos.length > 0 ? (
                             channelVideos.map((item) => (

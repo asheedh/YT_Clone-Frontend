@@ -30,61 +30,60 @@ const CreateChannel = () => {
 
     // Function to create a channel
     const handleFormSubmit = async (e) => {
-      e.preventDefault();
-      let channelData = { ...formData, owner: user?._id };
-  
-      try {
-          let result = await axios.post(
-              "http://localhost:5200/api/channel/createChannel",  // ✅ Correct API URL
-              channelData,
-              {
-                  headers: {
-                      Authorization: `JWT ${jwtToken}`,
-                  },
-              }
-          );
-          
-          console.log("result data",result?.data)
-          if (result?.data) {
-              toast.success("Channel created successfully");
-              console.log("API Response:", result.data);
-  
-              // ✅ Update Redux auth state with the new channel ID
-              dispatch(signin({ user: result?.data?.updatedUser, jwtToken: jwtToken }));
-  
-              // ✅ Fetch and update user details in Redux
-              await fetchCurrentUser();
-              navigate('/');
-          }
-      } catch (error) {
-        console.log(error);
-        toast.error(error?.response?.data?.message);
-      }
+        e.preventDefault();
+        let channelData = { ...formData, owner: user?._id };
+
+        try {
+            let result = await axios.post(
+                "http://localhost:5200/api/channel/createChannel",  // Correct API URL
+                channelData,
+                {
+                    headers: {
+                        Authorization: `JWT ${jwtToken}`,
+                    },
+                }
+            );
+
+            console.log("result data", result?.data)
+            if (result?.data) {
+                toast.success("Channel created successfully");
+                console.log("API Response:", result.data);
+
+                // Update Redux auth state with the new channel ID
+                dispatch(signin({ user: result?.data?.updatedUser, jwtToken: jwtToken }));
+
+                // Fetch and update user details in Redux
+                await fetchCurrentUser();
+                navigate('/');
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error?.response?.data?.message);
+        }
     };
-  
 
     // Function to fetch updated user details and update Redux
     const fetchCurrentUser = async () => {
-      try {
-          let { data } = await axios.get(
-              `http://localhost:5200/api/users/${user?._id}`,
-              {
-                  headers: {
-                      Authorization: `JWT ${jwtToken}`,
-                  },
-              }
-          );
-  
-          if (data?.user) {
-              console.log("Updated User Data:", data.user);
-              dispatch(setUserChannelDetails(data.user)); // Update userChannel state
-              dispatch(signin({ user: data.user, jwtToken })); // Update auth state (localStorage)
-          }
-      } catch (error) {
-          console.log(error);
-          toast.error(error?.response?.data?.message);
-      }
-    };  
+        try {
+            let { data } = await axios.get(
+                `http://localhost:5200/api/users/${user?._id}`,
+                {
+                    headers: {
+                        Authorization: `JWT ${jwtToken}`,
+                    },
+                }
+            );
+
+            if (data?.user) {
+                console.log("Updated User Data:", data.user);
+                dispatch(setUserChannelDetails(data.user)); // Update userChannel state
+                dispatch(signin({ user: data.user, jwtToken })); // Update auth state (localStorage)
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error?.response?.data?.message);
+        }
+    };
 
     useEffect(() => {
         if (userChannel && Object.keys(userChannel).length >= 1) {
@@ -113,10 +112,10 @@ const CreateChannel = () => {
                 <input id="channelLogo" type="url" required value={formData.channelLogo} name="channelLogo" onChange={handleChange} />
 
                 <label htmlFor="channelBanner">Channel Banner (URL)</label>
-                <input id="channelBanner" type="url" required value={formData.channelBanner} name="channelBanner" onChange={handleChange}/>
+                <input id="channelBanner" type="url" required value={formData.channelBanner} name="channelBanner" onChange={handleChange} />
 
                 <label htmlFor="description">Channel Description</label>
-                <input id="description" type="text" required value={formData.description} name="description" onChange={handleChange}/>
+                <input id="description" type="text" required value={formData.description} name="description" onChange={handleChange} />
 
                 <button type="submit" className="submit-btn">
                     Create Channel

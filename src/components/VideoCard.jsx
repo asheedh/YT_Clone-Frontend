@@ -5,6 +5,7 @@ import "../styles/videoCard.css";
 import time from '../utils/time';
 import formatViews from '../utils/formatViews';
 import { newContext } from "../App";
+
 function VideoCard({ videoId, title, thumbnailUrl, channelId, views, createdAt }) {
     const [channelData, setChannelData] = useState({});
     const { isCollapse } = useContext(newContext);
@@ -26,10 +27,10 @@ function VideoCard({ videoId, title, thumbnailUrl, channelId, views, createdAt }
         };
         fetchData();
         return () => { isMounted = false; };
-    }, [channelId]); 
-    
+    }, [channelId]);
+
     return (
-        <div className={`VideoCard ${isCollapse ? "VCcollapsed" : ""}` }>
+        <div className={`VideoCard${isCollapse ? "VCcollapsed" : ""}`}>
             {/* Thumbnail */}
             <Link to={`/watch/${videoId}`}>
                 <img src={thumbnailUrl || ""} alt={title} className="thumbnailImage" />
@@ -37,15 +38,20 @@ function VideoCard({ videoId, title, thumbnailUrl, channelId, views, createdAt }
 
             {/* Video Info */}
             <div className="videIinfo">
-                <img className="channelLogo" src={channelData.channelLogo || " img "} />
+                <Link to={`/channel/${channelId}`}>
+                    <img className="channelLogo" src={channelData.channelLogo || " img "} />
+                </Link>
                 <div className="videoDetails">
-                <h3 className="videoTitle">{title.length > 72 ? title.slice(0, 72) + "..." : title}</h3>
-                <p className="channelName">{channelData?.channelName}</p>
+                    <Link to={`/watch/${videoId}`}>
+                        <h3 className="videoTitle">{title.length > 62 ? title.slice(0, 54) + "..." : title}</h3>
+                    </Link> 
+
+                    <Link to={`/channel/${channelId}`}>
+                        <p className="channelName">{channelData?.channelName}</p>
+                    </Link>
                     <span className="views">{formatViews(views)} Views • {time(createdAt)}</span>
                 </div>
             </div>
-
-
         </div>
     );
 }

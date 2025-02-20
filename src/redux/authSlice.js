@@ -16,16 +16,16 @@ const authSlice = createSlice({
             state.user = action.payload.user;
             state.token = action.payload.jwtToken;
             state.isAuthenticated = true;
-            
+
+            // Ensure the channel ID is updated if present
             if (action.payload.user.channel) {
                 state.user.channel = action.payload.user.channel;
             }
-        
+
             // Save to localStorage
             localStorage.setItem("auth", JSON.stringify(state));
         },
-        
-        
+
         signout: (state) => {
             state.user = null;
             state.token = null;

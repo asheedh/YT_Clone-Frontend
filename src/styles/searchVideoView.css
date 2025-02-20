@@ -66,7 +66,7 @@
   display: none;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 600px) {
   .search-video-container {
     width: 100%;
     height: auto;
@@ -94,5 +94,32 @@
   .search-video-data {
     height: auto;
     gap: 5px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .search-view-thumbnail {
+    width: 40%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .search-channel-logo {
+    width: 25px;
+    height: 25px;
+  }
+
+  .video-description {
+    display: none;
+  }
+
+  .search-video-data {
+    height: auto;
+    width: 60%;
+  }
+
+  .search-video-container {
+    gap: 8px;
   }
 }

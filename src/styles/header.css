@@ -411,17 +411,17 @@
     }
 
     .mbl-search-container.active .mbl-back-btn {
-        display: block;
+        display: block; /* Show back button when search container is active */
     }
 
     .mbl-header-content.hidden {
-        display: none;
+        display: none; /* Hide header content when hidden class is applied */
     }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .logo-Container {
-        gap: 10px;
+        gap: 10px; /* Adjust gap for logo container */
     }
 
     .logo-Container p {
@@ -453,11 +453,7 @@
 
     .user-actions {
         justify-content: space-around;
-        width: auto;
-        padding-right: 8px;
-    }
-
-    #create {
-        display: none;
+        width: 180px;
+        align-items: center;
     }
 }

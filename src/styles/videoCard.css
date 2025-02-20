@@ -1,6 +1,7 @@
-*{
+* {
     font-family: 'Roboto';
 }
+
 .VideoCard {
     overflow: hidden;
     border-radius: 8px;
@@ -8,7 +9,7 @@
     height: 350px
 }
 
-.VCcollapsed {
+.VideoCardVCcollapsed {
     width: 330px;
     height: 280px;
 }
@@ -36,31 +37,31 @@
 
 .videoTitle {
     display: -webkit-box;
-    line-clamp: 2; /* Limit to 2 lines */
+    line-clamp: 2;
+    /* Limit to 2 lines */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-height: 45px; 
+    max-height: 45px;
     font-size: medium;
 }
 
-.videoDetails span{
+.videoDetails span {
     display: flex;
     align-items: center;
     font-size: small;
     font-weight: lighter;
 }
 
-
-/* Responsiveness  */
+/* Responsiveness */
 
 @media (max-width: 600px) {
-    .VideoCard{
-        width: 100%;
-        border-radius: 0px;
+    .VideoCard {
+        width: 100%; /* Full width for small screens */
+        border-radius: 0px; /* Remove border radius for small screens */
     }
+
     .thumbnailImage {
-        border-radius: 0px;
+        border-radius: 0px; /* Remove border radius for small screens */
     }
-  
-  }
+}

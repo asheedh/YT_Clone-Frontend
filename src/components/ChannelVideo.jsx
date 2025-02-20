@@ -18,7 +18,7 @@ const ChannelVideo = ({ triggerVideoFetching, item, channelData }) => {
   const [op, setOp] = useState(false);
   const navigate = useNavigate();
 
-  // delete video function
+  // Function to delete a video
   const handleDelete = async (videoId) => {
     try {
       const result = await axios.delete(
@@ -31,7 +31,7 @@ const ChannelVideo = ({ triggerVideoFetching, item, channelData }) => {
       );
       if (result) {
         toast.success("Video deleted successfully");
-        triggerVideoFetching();
+        triggerVideoFetching(); // Refresh the video list
       }
     } catch (error) {
       console.log(error);
@@ -46,9 +46,9 @@ const ChannelVideo = ({ triggerVideoFetching, item, channelData }) => {
       <div>
         <Link to={`/watch/${item._id}`}>
           <img
-          src={item.thumbnailUrl}
-          alt={item.title.slice(0, 10) + "..."}
-          className = "video-thumbnail"
+            src={item.thumbnailUrl}
+            alt={item.title.slice(0, 10) + "..."}
+            className="video-thumbnail"
           />
         </Link>
       </div>
@@ -74,7 +74,7 @@ const ChannelVideo = ({ triggerVideoFetching, item, channelData }) => {
                   className="option-item"
                 >
                   <CiEdit />
-                  Edit 
+                  Edit
                 </li>
                 <li onClick={() => handleDelete(item._id)} className="option-item">
                   <MdDeleteOutline />

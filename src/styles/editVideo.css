@@ -77,31 +77,30 @@ textarea {
   #thumbnailUrl,
   #videoUrl,
   #category {
-    width: 300px;
-    height: 30px;
-    padding: 2px;
-
+    width: 300px; /* Adjust width for small screens */
+    height: 30px; /* Adjust height for small screens */
+    padding: 2px; /* Adjust padding for small screens */
   }
 
   #description {
-    width: 300px;
-    height: 100px;
-    padding: 2px;
+    width: 300px; /* Adjust width for small screens */
+    height: 100px; /* Adjust height for small screens */
+    padding: 2px; /* Adjust padding for small screens */
   }
 
   .update-video-form {
-    border: 2px solid black;
-    max-width: 100vw;
-    gap: 0px;
-    height: 70%;
-    font-size: small;
-    padding: 12px;
+    border: 2px solid black; /* Border for update video form */
+    max-width: 100vw; /* Full width for small screens */
+    gap: 0px; /* No gap for small screens */
+    height: 70%; /* Adjust height for small screens */
+    font-size: small; /* Small font size for small screens */
+    padding: 12px; /* Padding for update video form */
   }
 
   .update-video-container {
-    width: 90%;
-    min-height: 100vh;
-    height: 80%;
+    width: 90%; /* Adjust width for small screens */
+    min-height: 100vh; /* Full height for small screens */
+    height: 80%; /* Adjust height for small screens */
   }
 
   .edit-video-thumbnail {

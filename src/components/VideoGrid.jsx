@@ -5,14 +5,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
 
-
-
 function VideoGrid() {
   const isSigned = useSelector((state) => state.auth.isAuthenticated);
 
   const [videos, setVideos] = useState([]);
   const [filteredData, setFilteredData] = useState(videos);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   // Fetch videos
   useEffect(() => {
@@ -35,6 +33,7 @@ function VideoGrid() {
     fetchData();
   }, []);
 
+  // Handle category filter
   const handleFilter = (filteredItem) => {
     if (filteredItem === "All") {
       setFilteredData(videos);
@@ -46,14 +45,6 @@ function VideoGrid() {
       );
     }
   };
-  // if (!isSigned) {
-  //     return (
-  //         <div className="extraData">
-  //             <h1>Try searching to get started</h1>
-  //             <p>Start watching videos to help us build a feed of videos you'll love.</p>
-  //         </div>
-  //     ); 
-  // }  
 
   const categories = [
     "All",
