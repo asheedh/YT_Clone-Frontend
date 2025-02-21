@@ -26,7 +26,7 @@ const SearchVideoView = ({ item }) => {
   }, [item?.channelId]);
 
   return (
-    <Link to={`/video/${item?._id}`} className="search-video-container">
+    <Link to={`/watch/${item?._id}`} className="search-video-container">
       <img className="search-view-thumbnail" src={item?.thumbnailUrl} alt="video thumbnail" />
 
       <div className="search-video-data">
@@ -51,3 +51,6 @@ const SearchVideoView = ({ item }) => {
 };
 
 export default SearchVideoView;
+
+// 67b30824f58b6147bd7dd778 
+// 67b30824f58b6147bd7dd778
