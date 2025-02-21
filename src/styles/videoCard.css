@@ -64,4 +64,8 @@
     .thumbnailImage {
         border-radius: 0px; /* Remove border radius for small screens */
     }
+    .VideoCardVCcollapsed {
+        width: 100%; /* Full width for small screens */
+        border-radius: 0px; /* Remove border radius for small screens */
+    }
 }

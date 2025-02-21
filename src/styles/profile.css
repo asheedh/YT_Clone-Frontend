@@ -64,4 +64,17 @@
     .profile-container {
         border: 2px solid black; /* Border for profile container on small screens */
     }
+    .profile-container .profile-placeholder {
+        background: rgb(0, 187, 255);
+        width: 150px;
+        height: 150px;
+        font-size: 70px;
+        padding: 0px;
+    }
+    .image-container img {
+        height: 150px;
+        width: 150px;
+        object-fit: cover;
+        border-radius: 9999px;
+    }
 }

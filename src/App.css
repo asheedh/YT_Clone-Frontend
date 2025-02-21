@@ -36,3 +36,10 @@
         width: 100%; /* Full width for small screens */
     }
 }
+
+@media (min-width:768px) and (max-width:1024px) {
+    .collapsed {
+        margin-left: 8vw;
+        width: calc(100vw - 8vw);
+    }
+}

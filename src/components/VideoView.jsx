@@ -228,7 +228,6 @@ const VideoView = () => {
           <h2 id="video-title">{`${videoData?.title}`} </h2>
           <div className="video-operations">
             <div className="left-group">
-              {console.log(channelData)}
               <Link to={`/channel/${channelData._id}`} className="channel-link">
                 <img
                   id="logo"

@@ -255,6 +255,7 @@
 
   .extra-information {
     justify-content: space-between;
+    padding: 0px;
   }
 
   .sideView {
