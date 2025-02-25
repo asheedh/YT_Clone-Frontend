@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import SearchVideoView from "./SearchVideoView";
-import "../styles/SearchVideos.css";
+import "../styles/searchVideos.css";
 
 const SearchVideos = () => {
   const [videoResults, setVideoResults] = useState([]);

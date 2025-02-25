@@ -7,7 +7,7 @@ import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 import { toast } from "react-toastify";
 import time from "../utils/time";
-import "../styles/Comment.css";
+import "../styles/comment.css";
 
 const Comment = ({ triggerCommentFetch, createdAt, owner, description, id, video }) => {
   const [commentOwner, setCommentOwner] = useState({});
