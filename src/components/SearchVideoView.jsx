@@ -7,13 +7,14 @@ import "../styles/searchVideoView.css";
 
 const SearchVideoView = ({ item }) => {
   const [channelData, setChannelData] = useState({});
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     // Function to fetch channel data based on channel ID
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          item?.channelId ? `http://localhost:5200/api/channel/${item?.channelId}` : null
+          item?.channelId ? `${API_URL}/api/channel/${item?.channelId}` : null
         );
         if (data) {
           setChannelData(data.channel);

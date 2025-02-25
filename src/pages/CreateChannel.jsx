@@ -12,6 +12,7 @@ const CreateChannel = () => {
     const userChannel = useSelector((state) => state.userChannel.userChannelDetails);
     const user = useSelector((state) => state.auth.user);
     const jwtToken = useSelector((state) => state.auth.token);
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const navigate = useNavigate();
 
@@ -35,7 +36,7 @@ const CreateChannel = () => {
 
         try {
             let result = await axios.post(
-                "http://localhost:5200/api/channel/createChannel",  // Correct API URL
+                `${API_URL}/api/channel/createChannel`,  // Correct API URL
                 channelData,
                 {
                     headers: {
@@ -66,7 +67,7 @@ const CreateChannel = () => {
     const fetchCurrentUser = async () => {
         try {
             let { data } = await axios.get(
-                `http://localhost:5200/api/users/${user?._id}`,
+                `${API_URL}/api/users/${user?._id}`,
                 {
                     headers: {
                         Authorization: `JWT ${jwtToken}`,

@@ -28,6 +28,7 @@ const VideoView = () => {
   const isSigned = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   // Like video
   const handleLike = async () => {
@@ -38,7 +39,7 @@ const VideoView = () => {
     try {
       const uId = user._id;
       const { data } = await axios.put(
-        video ? `http://localhost:5200/api/video/likeVideo/${video}` : null,
+        video ? `${API_URL}/api/video/likeVideo/${video}` : null,
         { uId },
         {
           headers: { Authorization: `JWT ${token}` },
@@ -67,7 +68,7 @@ const VideoView = () => {
     try {
       const uId = user._id;
       const { data } = await axios.put(
-        video ? `http://localhost:5200/api/video/disLikeVideo/${video}` : null,
+        video ? `${API_URL}/api/video/disLikeVideo/${video}` : null,
         { uId },
         {
           headers: { Authorization: `JWT ${token}` },
@@ -91,7 +92,7 @@ const VideoView = () => {
     // Fetch video details
     const fetchData = async () => {
       const { data } = await axios.get(
-        video ? `http://localhost:5200/api/video/${video}` : null
+        video ? `${API_URL}/api/video/${video}` : null
       );
       if (data) {
         setVideoData(data.video);
@@ -118,7 +119,7 @@ const VideoView = () => {
   const fetchChannelVideos = async (id) => {
     try {
       const { data } = await axios.get(
-        id ? `http://localhost:5200/api/video/channelVideos/${id}` : null
+        id ? `${API_URL}/api/video/channelVideos/${id}` : null
       );
       if (data) {
         setChannelVideos(data.videos);
@@ -131,7 +132,7 @@ const VideoView = () => {
   // Fetch channel data
   const fetchChannelData = async (cId) => {
     const { data } = await axios.get(
-      cId ? `http://localhost:5200/api/channel/${cId}` : null
+      cId ? `${API_URL}/api/channel/${cId}` : null
     );
     if (data) {
       setChannelData(data.channel);
@@ -152,7 +153,7 @@ const VideoView = () => {
   // Fetch video comments
   const fetchVideoComments = async () => {
     const { data } = await axios.get(
-      video ? `http://localhost:5200/api/comment/videoComments/${video}` : null
+      video ? `${API_URL}/api/comment/videoComments/${video}` : null
     );
     if (data) {
       setComments(data.comments);
@@ -179,7 +180,7 @@ const VideoView = () => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:5200/api/comment/addComment",
+        `${API_URL}/api/comment/addComment`,
         commentData
       );
       if (response.data) {
@@ -201,7 +202,7 @@ const VideoView = () => {
 
     try {
       const { data } = await axios.put(
-        `http://localhost:5200/api/channel/subscribeChannel/${channelData._id}/${user._id}`,
+        `${API_URL}/api/channel/subscribeChannel/${channelData._id}/${user._id}`,
         {},
         { headers: { Authorization: `JWT ${token}` } }
       );

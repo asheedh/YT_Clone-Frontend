@@ -30,6 +30,7 @@ function Header() {
     const [error, setError] = useState(null);
     const [isProfileClicked, setIsProfileClicked] = useState(false);
     const [isCreateClicked, setIsCreateClicked] = useState(false);
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -44,7 +45,7 @@ function Header() {
         if (!userId) return;
 
         setLoading(true);
-        axios.get(userId ? `http://localhost:5200/api/users/${userId}` : null)
+        axios.get(userId ? `${API_URL}/api/users/${userId}` : null)
             .then((response) => {
                 setUser(response.data.user);
                 setLoading(false);
@@ -53,7 +54,7 @@ function Header() {
                 setError(err.message);
                 setLoading(false);
             });
-    }, [userId]);
+    }, [userId, API_URL]);
 
     function handleIsClicked(menuType) {
         if (menuType === "create") {

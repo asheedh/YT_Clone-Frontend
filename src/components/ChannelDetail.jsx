@@ -14,13 +14,14 @@ const ChannelDetail = () => {
     const [loading, setLoading] = useState(false);
     const [moreClick, setMoreClick] = useState(false);
     const { id } = useParams(); // Get channel ID from the URL
+    const API_URL = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         // Function to fetch channel data by ID
         const fetchChannelData = async () => {
             if (!id) return; // Prevents invalid API calls
             try {
-                const { data } = await axios.get(`http://localhost:5200/api/channel/${id}`);
+                const { data } = await axios.get(`${API_URL}/api/channel/${id}`);
                 if (data?.channel) {
                     setChannelData(data.channel);
                 }
@@ -30,7 +31,7 @@ const ChannelDetail = () => {
         };
 
         fetchChannelData();
-    }, [id]); // Fetch new channel data when the channel ID changes in the URL
+    }, [id, API_URL]); // Fetch new channel data when the channel ID changes in the URL
 
     useEffect(() => {
         if (channelData?._id) {
@@ -44,7 +45,7 @@ const ChannelDetail = () => {
 
         setLoading(true);
         try {
-            const { data } = await axios.get(`http://localhost:5200/api/video/channelVideos/${channelId}`);
+            const { data } = await axios.get(`${API_URL}/api/video/channelVideos/${channelId}`);
             if (data?.videos) {
                 setChannelVideos(data.videos);
             }

@@ -11,6 +11,7 @@ const Profile = () => {
   const [channelData, setChannelData] = useState(null);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     // If the user doesn't have a channel, we finish loading without fetching data.
@@ -22,7 +23,7 @@ const Profile = () => {
     // Fetch channel details if a channel exists
     const fetchChannelData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5200/api/channel/${user.channel}`);
+        const response = await axios.get(`${API_URL}/api/channel/${user.channel}`);
         setChannelData(response.data.channel);
       } catch (error) {
         console.error("Error fetching channel data:", error);

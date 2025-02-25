@@ -17,12 +17,13 @@ const ChannelVideo = ({ triggerVideoFetching, item, channelData }) => {
   const { isCollapse } = useContext(newContext);
   const [op, setOp] = useState(false);
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   // Function to delete a video
   const handleDelete = async (videoId) => {
     try {
       const result = await axios.delete(
-        `http://localhost:5200/api/video/deleteVideo/${videoId}/${channelData?._id}/${user?._id}`,
+        `${API_URL}/api/video/deleteVideo/${videoId}/${channelData?._id}/${user?._id}`,
         {
           headers: {
             Authorization: `JWT ${token}`,

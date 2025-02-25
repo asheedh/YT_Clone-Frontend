@@ -15,13 +15,14 @@ const Comment = ({ triggerCommentFetch, createdAt, owner, description, id, video
   const [editedDescription, setEditedDescription] = useState(description);
   const user = useSelector((state) => state.auth.user);
   const [op, setOp] = useState(false);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     // Fetch the owner of the comment
     const fetchOwner = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5200/api/users/${owner}`
+          `${API_URL}/api/users/${owner}`
         );
         if (data) {
           setCommentOwner(data.user);
@@ -37,7 +38,7 @@ const Comment = ({ triggerCommentFetch, createdAt, owner, description, id, video
   const handleDelete = async () => {
     try {
       const result = await axios.delete(
-        `http://localhost:5200/api/comment/deleteComment/${id}/${video}/${user?._id}`
+        `${API_URL}/api/comment/deleteComment/${id}/${video}/${user?._id}`
       );
       if (result) {
         toast.success("Comment deleted successfully");
@@ -54,7 +55,7 @@ const Comment = ({ triggerCommentFetch, createdAt, owner, description, id, video
   const handleUpdate = async () => {
     try {
       const result = await axios.put(
-        `http://localhost:5200/api/comment/updateComment/${id}/${video}/${user?._id}`,
+        `${API_URL}/api/comment/updateComment/${id}/${video}/${user?._id}`,
         { description: editedDescription }
       );
       if (result) {

@@ -11,6 +11,7 @@ const EditVideo = () => {
     const userChannel = useSelector((store) => store.userChannel.userChannelDetails);
     const user = useSelector((state) => state.auth.user);
     const jwtToken = useSelector((state) => state.auth.token);
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const [formData, setFormData] = useState({
         title: "",
@@ -25,7 +26,7 @@ const EditVideo = () => {
         const fetchData = async () => {
             try {
                 const { data } = await axios.get(
-                    `http://localhost:5200/api/video/${params.id}`
+                    `${API_URL}/api/video/${params.id}`
                 );
 
                 // Check if the user is authorized to edit the video
@@ -51,7 +52,7 @@ const EditVideo = () => {
         };
 
         fetchData();
-    }, [params, user._id, navigate]);
+    }, [params, user._id, navigate, API_URL]);
 
     // Handle form input changes
     const handleChange = (e) => {
@@ -65,7 +66,7 @@ const EditVideo = () => {
 
         try {
             let result = await axios.put(
-                `http://localhost:5200/api/video/updateVideo/${params.id}/${user.channel}/${user?._id}`,
+                `${API_URL}/api/video/updateVideo/${params.id}/${user.channel}/${user?._id}`,
                 formData,
                 {
                     headers: {

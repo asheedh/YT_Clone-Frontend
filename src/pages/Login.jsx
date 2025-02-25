@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signin } from "../redux/authSlice";
 import "../styles/login.css";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Login() {
     const [formData, setFormData] = useState({ email: "", password: "" });
@@ -30,7 +31,7 @@ function Login() {
         }
 
         try {
-            const response = await fetch("http://localhost:5200/api/users/login", {
+            const response = await fetch(`${API_URL}/api/users/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),

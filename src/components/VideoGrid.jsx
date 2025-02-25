@@ -11,6 +11,8 @@ function VideoGrid() {
   const [videos, setVideos] = useState([]);
   const [filteredData, setFilteredData] = useState(videos);
   const [loading, setLoading] = useState(false);
+  const API_URL = import.meta.env.VITE_API_URL;
+
 
   // Fetch videos
   useEffect(() => {
@@ -18,7 +20,7 @@ function VideoGrid() {
       setLoading(true);
       try {
         const { data } = await axios.get(
-          "http://localhost:5200/api/video/"
+          `${API_URL}/api/video`
         );
         if (data) {
           setVideos(data.videos);
@@ -31,7 +33,7 @@ function VideoGrid() {
       }
     };
     fetchData();
-  }, []);
+  }, [API_URL]);
 
   // Handle category filter
   const handleFilter = (filteredItem) => {

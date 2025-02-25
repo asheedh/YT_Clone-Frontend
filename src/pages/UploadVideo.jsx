@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../styles/upload.css";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const UploadVideo = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const UploadVideo = () => {
       if (user?.channel) {
         try {
           const { data } = await axios.get(
-            ` http://localhost:5200/api/channel/${user?.channel}`,
+            ` ${API_URL}/api/channel/${user?.channel}`,
             {
               headers: {
                 Authorization: `JWT ${jwtToken}`,
@@ -79,7 +80,7 @@ const UploadVideo = () => {
 
     try {
       let result = await axios.post(
-        "http://localhost:5200/api/video/addVideo",
+        `${API_URL}/api/video/addVideo`,
         videoData,
         {
           headers: {

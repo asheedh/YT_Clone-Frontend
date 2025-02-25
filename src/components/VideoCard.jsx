@@ -9,6 +9,7 @@ import { newContext } from "../App";
 function VideoCard({ videoId, title, thumbnailUrl, channelId, views, createdAt }) {
     const [channelData, setChannelData] = useState({});
     const { isCollapse } = useContext(newContext);
+    const API_URL = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         // Fetch channel details
@@ -16,7 +17,7 @@ function VideoCard({ videoId, title, thumbnailUrl, channelId, views, createdAt }
         const fetchData = async () => {
             try {
                 const { data } = await axios.get(
-                    channelId ? `http://localhost:5200/api/channel/${channelId}` : null
+                    channelId ? `${API_URL}/api/channel/${channelId}` : null
                 );
                 if (data) {
                     setChannelData(data.channel);

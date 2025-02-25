@@ -8,13 +8,14 @@ import "../styles/SearchVideos.css";
 const SearchVideos = () => {
   const [videoResults, setVideoResults] = useState([]);
   const params = useParams();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     // Function to fetch videos based on search item
     const fetchVideos = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5200/api/video/search/${params.searchItem}`
+          `${API_URL}/api/video/search/${params.searchItem}`
         );
         if (data) {
           setVideoResults(data.videos);
@@ -25,7 +26,7 @@ const SearchVideos = () => {
       }
     };
     fetchVideos();
-  }, [params]);
+  }, [params, API_URL]);
 
   return (
     <div className="results-container">

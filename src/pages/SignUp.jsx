@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../styles/signUp.css";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -33,7 +34,7 @@ const SignUp = () => {
 
     try {
       const { userName, email, password, avatar } = formData;
-      let { data } = await axios.post("http://localhost:5200/api/users/signup", {
+      let { data } = await axios.post(`${API_URL}/api/users/signup`, {
         userName, email, password, avatar
       });
 
